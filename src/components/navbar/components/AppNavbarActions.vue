@@ -1,7 +1,7 @@
 <template>
   <div class="app-navbar-actions">
     <VaButton
-      v-if="!isMobile"
+      v-if="false"
       preset="secondary"
       href="https://ui.vuestic.dev/support/consulting"
       target="_blank"
@@ -12,7 +12,7 @@
       {{ t('supportAndConsulting') }}
     </VaButton>
     <VaButton
-      v-if="!isMobile"
+      v-if="false"
       preset="secondary"
       href="https://admin.vuestic.dev/"
       target="_blank"
@@ -22,9 +22,9 @@
       <VaIcon size="large" class="material-symbols-outlined mr-1">info</VaIcon>
       {{ t('aboutVuesticAdmin') }}
     </VaButton>
-    <GithubButton v-if="!isMobile" class="app-navbar-actions__item" />
+    <GithubButton v-if="false" class="app-navbar-actions__item" />
     <VaButton
-      v-if="!isMobile"
+      v-if="false"
       preset="secondary"
       href="https://discord.gg/u7fQdqQt8c"
       target="_blank"

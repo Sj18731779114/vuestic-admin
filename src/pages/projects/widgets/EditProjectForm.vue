@@ -85,6 +85,7 @@ const teamFiltersSearch = ref('')
         </div>
       </template>
     </VaSelect>
+    <!--
     <VaSelect
       v-model="newProject.team"
       v-model:search="teamFiltersSearch"
@@ -106,6 +107,7 @@ const teamFiltersSearch = ref('')
         </template>
       </template>
     </VaSelect>
+    -->
     <VaSelect
       v-model="newProject.status"
       label="Status"
