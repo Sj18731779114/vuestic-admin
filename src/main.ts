@@ -10,21 +10,40 @@ import stores from './stores'
 import router from './router'
 import vuesticGlobalConfig from './services/vuestic-ui/global-config'
 
-const app = createApp(App)
+import axios from 'axios'
 
-app.use(stores)
-app.use(router)
-app.use(i18n)
-app.use(createVuestic({ config: vuesticGlobalConfig }))
-
-if (import.meta.env.VITE_APP_GTM_ENABLED) {
-  app.use(
-    createGtm({
-      id: import.meta.env.VITE_APP_GTM_KEY,
-      debug: false,
-      vueRouter: router,
-    }),
-  )
+declare global {
+  interface Window {
+    baseUrl: string
+  }
 }
 
-app.mount('#app')
+// 加载 config.json 文件
+axios
+  .get('/config.json')
+  .then((response) => {
+    const config = response.data
+    window.baseUrl = process.env.NODE_ENV === 'production' ? config.baseUrl.production : config.baseUrl.development
+
+    const app = createApp(App)
+
+    app.use(stores)
+    app.use(router)
+    app.use(i18n)
+    app.use(createVuestic({ config: vuesticGlobalConfig }))
+
+    if (import.meta.env.VITE_APP_GTM_ENABLED) {
+      app.use(
+        createGtm({
+          id: import.meta.env.VITE_APP_GTM_KEY,
+          debug: false,
+          vueRouter: router,
+        }),
+      )
+    }
+
+    app.mount('#app')
+  })
+  .catch((error) => {
+    console.error('Failed to load config.json:', error)
+  })

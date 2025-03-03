@@ -1,0 +1,6 @@
+{
+  "baseUrl": {
+    "development": "http://localhost:5173",
+    "production": "http://47.99.124.76:8080"
+  }
+}
