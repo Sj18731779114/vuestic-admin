@@ -14,6 +14,7 @@
         <RouterLink to="/" aria-label="Visit home page">
           <VuesticLogo />
         </RouterLink>
+        <a :download="downloadFileName" style="float: right; color: blue" @click="downloadFile"> 登记表 </a>
       </div>
     </template>
     <template #right>
@@ -27,6 +28,26 @@ import { storeToRefs } from 'pinia'
 import { useGlobalStore } from '../../stores/global-store'
 import AppNavbarActions from './components/AppNavbarActions.vue'
 import VuesticLogo from '../VuesticLogo.vue'
+
+const fileUrl = window.baseUrl + '/table.pdf' // 确保路径正确
+const downloadFileName = '婚姻登记表.pdf'
+
+const downloadFile = async () => {
+  try {
+    // const response = await fetch(fileUrl)
+    // const blob = await response.blob()
+    // const url = window.URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = fileUrl
+    link.download = downloadFileName
+    // document.body.appendChild(link)
+    link.click()
+    // document.body.removeChild(link)
+    // window.URL.revokeObjectURL(url)
+  } catch (error) {
+    console.error('下载失败:', error)
+  }
+}
 
 defineProps({
   isMobile: { type: Boolean, default: false },
